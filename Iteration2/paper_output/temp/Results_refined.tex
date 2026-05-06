@@ -1,0 +1,95 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+We begin our analysis by visualizing the structure of the turbulent flow that governs tracer transport. Figure \ref{fig:image6} shows a representative two-dimensional slice of the Q-criterion field, where regions of positive Q (yellow) highlight coherent vortex cores. These structures, characterized by rotation dominating strain, are interspersed with regions of high strain (negative Q, purple). The complex and transient nature of this vortex field is the primary driver of the dispersion dynamics we investigate.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_2_Q_criterion_slice_1_1778068241.png}
+    \caption{A two-dimensional slice of the Q-criterion field at z=0 from the final simulation snapshot, visualizing the instantaneous structure of the turbulent flow. Regions of positive Q-criterion (yellow) identify vortex cores where rotation dominates strain, acting as temporary trapping sites for passive tracers. Conversely, regions of large negative Q-criterion (purple) are dominated by strain. The complex field of these transient vortical and high-strain structures governs the overall transport and diffusion dynamics.}
+    \label{fig:image6}
+\end{figure}
+
+\subsection{Temporal evolution of tracer dispersion}
+
+The primary measure of transport, the ensemble-averaged Mean-Square Displacement (MSD), is presented in Figure \ref{fig:image1}. The evolution of the MSD reveals four distinct transport regimes, characterized by the local logarithmic slope $\alpha(t) = d(\log \text{MSD}) / d(\log t)$. At very early times ($t < 0.3$), transport is ballistic ($\alpha \approx 2$), as tracers move with their initial velocity. This is followed by a superdiffusive crossover regime ($0.3 < t < 1.5$) where $\alpha$ gradually decreases from approximately 1.7 to 1. The system then enters a diffusive regime ($\alpha \approx 1$) for $1.5 < t < 4$. The physical diffusion coefficient, estimated from the integral of the velocity autocorrelation function before the onset of saturation, is $D \approx 0.010$.
+
+At late times ($t > 4$), the MSD begins to flatten, and $\alpha(t)$ drops significantly below unity. This behavior is not indicative of physical subdiffusion but is an artifact of geometric saturation. As tracers explore the entire periodic domain of side length $L=1$, their maximum possible squared displacement is limited, approaching the theoretical saturation value of $L^2/6 \approx 0.167$. By the end of the simulation, 82.9\% of tracers have crossed a periodic boundary, confirming that late-time statistics are dominated by these finite-domain effects.
+
+Figure \ref{fig:image1} also shows a conditional MSD analysis, comparing tracers that spend the most time in vortex cores (Trapped cohort) with those that spend the least (Free cohort). The MSD of the Trapped cohort is systematically lower at all time lags, quantifying the retarding effect of vortex trapping on macroscopic transport.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_MSD_conditional_1778069999.png}
+    \caption{Mean-Square Displacement (MSD) and its local scaling exponent $\alpha(t)$. (Left) The ensemble-averaged MSD for 8,000 tracers transitions from ballistic ($\alpha \approx 2$) to nearly diffusive ($\alpha \approx 1$) transport before reaching the geometric saturation limit $L^2/6$. The conditional analysis shows that tracers spending more time in vortices (Trapped cohort, top 20\% Q-criterion residence) have a systematically lower MSD than those that are less trapped (Free cohort), quantifying the transport reduction due to vortex trapping. (Right) The scaling exponent $\alpha(t)$ highlights these regimes and shows that the late-time drop below unity is an artifact of this geometric saturation, not physical subdiffusion.}
+    \label{fig:image1}
+\end{figure}
+
+\subsection{Transverse-dominant anisotropic dispersion}
+
+To investigate the directional properties of the transport, we decomposed the MSD into components parallel ($\text{MSD}_{\parallel}$) and perpendicular ($\text{MSD}_{\perp}$) to the instantaneous local large-scale velocity field. The resulting anisotropy ratio, $\lambda(t) = \text{MSD}_{\parallel}(t) / \text{MSD}_{\perp}(t)$, is shown in Figure \ref{fig:image3}.
+
+During the initial ballistic phase ($t < 0.5$), the anisotropy ratio peaks at $\lambda \approx 2.96$, indicating that initial displacements are preferentially aligned with the large-scale flow. However, as tracers begin to decorrelate from their initial velocity, the ratio rapidly drops below unity. For $t > 0.5$, the anisotropy stabilizes at a mean value of $\lambda \approx 0.52 \pm 0.045$. This result, $\lambda < 1$, reveals a persistent and significant anisotropy where dispersion perpendicular to the local large-scale velocity systematically exceeds parallel dispersion. This transverse-dominant transport is a direct kinematic signature of the solenoidal forcing, where large-scale rotational motions are more efficient at sweeping tracers in the transverse plane than advection is at carrying them along the flow direction.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_anisotropy_1778069999.png}
+    \caption{Dynamic anisotropy ratio $\lambda(t) = \text{MSD}_{\parallel} / \text{MSD}_{\perp}$, where the Mean-Square Displacement (MSD) is decomposed relative to the instantaneous large-scale velocity. After an initial ballistic phase where transport is preferentially parallel to the flow ($\lambda > 1$ for $t < 0.5$), the ratio drops and stabilizes below unity to a mean of $\lambda \approx 0.52$. This reversal demonstrates that perpendicular dispersion exceeds parallel dispersion at later times, a signature of solenoidal forcing where vortical motions spread tracers more effectively in the transverse direction than advection along the main flow.}
+    \label{fig:image3}
+\end{figure}
+
+\subsection{Transient nature of vortex trapping}
+
+The observation of a superdiffusive crossover regime motivates an investigation into its physical origin, particularly the role of vortex trapping. To quantify the duration of trapping events, we computed the Lagrangian autocorrelation function of the Q-criterion signal along tracer trajectories, shown in Figure \ref{fig:image2}. The function exhibits a rapid decay, crossing the $1/e$ threshold at a characteristic timescale of $\tau_Q \approx 0.200$.
+
+Comparing this trapping timescale to the large-eddy turnover time, $T_e = L/v_{\text{rms}} \approx 1/0.38 \approx 2.6$, we find that $\tau_Q / T_e \approx 0.077$. This demonstrates that tracers remain trapped within a coherent vortex for only about 7-8\% of a large-eddy turnover time. These trapping events are highly transient, likely terminated by three-dimensional vortex instabilities such as stretching and bending. The short residence times are insufficient to generate the long-term memory required for sustained anomalous transport phenomena, such as Lévy flights, explaining the eventual return to a diffusive regime.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_Q_autocorr_1778069999.png}
+    \caption{Autocorrelation of the Q-criterion along Lagrangian tracer trajectories. The correlation decays rapidly, defining a vortex trapping timescale, $\tau_{Q} \approx 0.200$, where the function drops to 1/e of its initial value. This short timescale, corresponding to approximately 7-8\% of a large-eddy turnover time, indicates that trapping events are too transient to generate the heavy-tailed waiting-time distributions characteristic of Lévy flights.}
+    \label{fig:image2}
+\end{figure}
+
+\subsection{Statistical properties of tracer displacements}
+
+The statistical nature of the transport process is further elucidated by the Probability Density Functions (PDFs) of tracer displacements, shown in Figure \ref{fig:image4}. At early times ($t=0.5, 1.0$), the distributions exhibit mild non-Gaussian features, consistent with the presence of velocity correlations during the superdiffusive crossover. By an intermediate time of $t=2.0$, the displacement PDF is statistically indistinguishable from a Gaussian distribution, as confirmed by a Kolmogorov-Smirnov test ($p=0.53$).
+
+Crucially, at late times ($t=5.0, 9.0$), the PDFs deviate significantly from Gaussian, but not by developing heavy tails. Instead, they become platykurtic (light-tailed and flat-topped), with an excess kurtosis approaching -1.2. This platykurtic shape is a direct consequence of the geometric saturation discussed previously; as tracers are confined within the periodic domain, their displacement distribution becomes more uniform and bounded. A Hill estimator applied to the distribution tails yields a power-law exponent of $\alpha_L \approx -7.1$, confirming the absence of the heavy tails ($0 < \alpha_L \leq 2$) that characterize Lévy flights.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_displacement_PDFs_1778069999.png}
+    \caption{Probability Density Functions (PDFs) of normalized tracer displacements at multiple lag times, compared with a Gaussian distribution (red line). The distributions transition from mildly non-Gaussian at early times (t = 0.5, 1.0) to being indistinguishable from Gaussian at an intermediate time (t = 2.0, KS p-value = 0.53). At late times (t = 5.0, 9.0), the PDFs become significantly platykurtic (flat-topped) with large negative excess kurtosis, a signature of geometric saturation in the finite periodic domain rather than the heavy tails associated with anomalous transport.}
+    \label{fig:image4}
+\end{figure}
+
+\subsection{Role of chaotic dynamics}
+
+Finally, we explored the connection between chaotic stretching and tracer dynamics using the Finite-Time Lyapunov Exponent (FTLE), a measure of trajectory separation. The long-time FTLE, calculated over the full trajectory, proves to be a weak indicator of the underlying dynamics in the periodic domain. The FTLE distributions are narrow and centered near zero, reflecting the bounded relative separation of tracers. As shown in Figure \ref{fig:image0}, the FTLE distributions for the Trapped and Free tracer cohorts are nearly identical, with statistically indistinguishable mean values ($-0.008 \pm 0.013$ for Trapped vs. $-0.007 \pm 0.013$ for Free).
+
+This lack of correlation is reinforced in Figure \ref{fig:image5} (left panel), which shows no relationship between a tracer's long-time FTLE and its residence fraction in vortices (Pearson r = 0.002). We also investigated whether tracers are ejected from vortices through regions of high strain by measuring the FTLE at the instant of vortex exit (Figure \ref{fig:image5}, right panel). The mean FTLE at exit points ($-0.010$) is only marginally lower than the ensemble average. This provides modest support for the hypothesis that ejection is strain-driven, but the signal is weak in the long-time FTLE metric. A shorter-timescale FTLE would be necessary to test this causal link more sharply.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_FTLE_cohorts_1778069999.png}
+    \caption{Probability density distribution of the Finite-Time Lyapunov Exponent (FTLE) for tracers classified as Trapped (red) or Free (blue) based on their residence time in high-vorticity regions. The distributions for both cohorts are nearly identical and centered close to zero, with mean FTLE values of -0.008 ± 0.013 for the Trapped cohort and -0.007 ± 0.013 for the Free cohort. This indicates that the long-time FTLE, measured over the full trajectory within the periodic domain, does not effectively distinguish between the dynamics of tracers trapped in vortices and those moving freely.}
+    \label{fig:image0}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../input_files/plots/step_8_exit_FTLE_1778069999.png}
+    \caption{Analysis of chaotic dynamics and vortex ejection. (Left) The long-time Finite-Time Lyapunov Exponent (FTLE) shows no correlation with the vortex residence fraction of tracers (Pearson r = 0.002), indicating that long-term chaoticity is independent of trapping duration. (Right) The distribution of FTLE values at the instant of vortex exit has a mean ($\mu$ = -0.010) nearly identical to the ensemble average, suggesting that ejection events are not strongly associated with regions of anomalously high chaotic stretching as measured by this long-time metric.}
+    \label{fig:image5}
+\end{figure}
+
+\end{document}
+                

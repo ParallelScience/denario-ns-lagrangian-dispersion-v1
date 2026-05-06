@@ -1,0 +1,37 @@
+{
+  "image0": {
+    "key": "image0",
+    "name": "step_8_FTLE_cohorts_1778069999.png",
+    "caption": "Probability density distribution of the Finite-Time Lyapunov Exponent (FTLE) for tracers classified as Trapped (red) or Free (blue) based on their residence time in high-vorticity regions. The distributions for both cohorts are nearly identical and centered close to zero, with mean FTLE values of -0.008 \u00b1 0.013 for the Trapped cohort and -0.007 \u00b1 0.013 for the Free cohort. This indicates that the long-time FTLE, measured over the full trajectory within the periodic domain, does not effectively distinguish between the dynamics of tracers trapped in vortices and those moving freely."
+  },
+  "image5": {
+    "key": "image5",
+    "name": "step_8_exit_FTLE_1778069999.png",
+    "caption": "Analysis of chaotic dynamics and vortex ejection. (Left) The long-time Finite-Time Lyapunov Exponent (FTLE) shows no correlation with the vortex residence fraction of tracers (Pearson r = 0.002), indicating that long-term chaoticity is independent of trapping duration. (Right) The distribution of FTLE values at the instant of vortex exit has a mean ($\\mu$ = -0.010) identical to the ensemble average, suggesting that ejection events are not associated with regions of anomalously high chaotic stretching as measured by this long-time metric."
+  },
+  "image1": {
+    "key": "image1",
+    "name": "step_8_MSD_conditional_1778069999.png",
+    "caption": "Mean-Square Displacement (MSD) and its local scaling exponent $\\alpha(t)$. (Left) The ensemble-averaged MSD for 8,000 tracers transitions from ballistic ($\\alpha \\approx 2$) to nearly diffusive ($\\alpha \\approx 1$) transport before reaching the geometric saturation limit $L^2/6$. The conditional analysis shows that tracers spending more time in vortices (Trapped cohort, top 20\\% Q-criterion residence) have a systematically lower MSD than those that are less trapped (Free cohort), quantifying the transport reduction due to vortex trapping. (Right) The scaling exponent $\\alpha(t)$ highlights these regimes and shows that the late-time drop below unity is an artifact of this geometric saturation, not physical subdiffusion."
+  },
+  "image6": {
+    "key": "image6",
+    "name": "step_2_Q_criterion_slice_1_1778068241.png",
+    "caption": "A two-dimensional slice of the Q-criterion field at z=0 from the final simulation snapshot, visualizing the instantaneous structure of the turbulent flow. Regions of positive Q-criterion (yellow) identify vortex cores where rotation dominates strain, acting as temporary trapping sites for passive tracers. Conversely, regions of large negative Q-criterion (purple) are dominated by strain. The complex field of these transient vortical and high-strain structures governs the overall transport and diffusion dynamics."
+  },
+  "image2": {
+    "key": "image2",
+    "name": "step_8_Q_autocorr_1778069999.png",
+    "caption": "Autocorrelation of the Q-criterion along Lagrangian tracer trajectories. The correlation decays rapidly, defining a vortex trapping timescale, $\\tau\\_{Q} \\approx 0.200$, where the function drops to 1/e of its initial value. This short timescale, corresponding to approximately 7-8\\% of a large-eddy turnover time, indicates that trapping events are too transient to generate the heavy-tailed waiting-time distributions characteristic of L\u00e9vy flights."
+  },
+  "image3": {
+    "key": "image3",
+    "name": "step_8_anisotropy_1778069999.png",
+    "caption": "Dynamic anisotropy ratio $\\lambda(t) = \\text{MSD}\\_\\parallel / \\text{MSD}\\_\\perp$, where the Mean-Square Displacement (MSD) is decomposed relative to the instantaneous large-scale velocity. After an initial ballistic phase where transport is preferentially parallel to the flow ($\\lambda > 1$ for $t < 0.5$), the ratio drops and stabilizes below unity to a mean of $\\lambda \\approx 0.52$. This reversal demonstrates that perpendicular dispersion exceeds parallel dispersion at later times, a signature of solenoidal forcing where vortical motions spread tracers more effectively in the transverse direction than advection along the main flow."
+  },
+  "image4": {
+    "key": "image4",
+    "name": "step_8_displacement_PDFs_1778069999.png",
+    "caption": "Probability Density Functions (PDFs) of normalized tracer displacements at multiple lag times, compared with a Gaussian distribution (red line). The distributions transition from mildly non-Gaussian at early times (t = 0.5, 1.0) to being indistinguishable from Gaussian at an intermediate time (t = 2.0, KS p-value = 0.53). At late times (t = 5.0, 9.0), the PDFs become significantly platykurtic (flat-topped) with large negative excess kurtosis, a signature of geometric saturation in the finite periodic domain rather than the heavy tails associated with anomalous transport."
+  }
+}

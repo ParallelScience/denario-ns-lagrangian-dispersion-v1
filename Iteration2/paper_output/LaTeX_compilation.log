@@ -1,0 +1,447 @@
+---- STDOUT ----
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Results.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+No file Results.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+
+LaTeX Warning: Reference `fig:image6' on page 1 undefined on input line 11.
+
+
+LaTeX Warning: Reference `fig:image1' on page 1 undefined on input line 22.
+
+! Undefined control sequence.
+l.22 ...\log t)$. At very early times ($t \lesssim
+                                                   0.3$), transport is balli...
+
+? ! Undefined control sequence.
+l.22 ...rdiffusive crossover regime ($0.3 \lesssim
+                                                   t \lesssim 1.5$) where $\...
+
+? 
+! Emergency stop.
+l.22 
+     
+No pages of output.
+Transcript written on Results.log.
+---- STDERR ----
+
+==== ERROR on iteration Pass 1 ====
+---- STDOUT ----
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper_v3_citations.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+No file paper_v3_citations.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+
+Package natbib Warning: Citation `freitas2026intermittencysuppressionturbulence
+forced' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `mizerski2022anisotropicturbulentviscositylarg
+escale' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `komorowski2005stationaritylagrangianobservati
+onspassive' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `küchler2024lagrangianparticletrackinglarge' o
+n page 1 undefined on input line 32.
+
+[1] [2]
+
+./paper_v3_citations.tex:36: LaTeX Error: \mathbf allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing } inserted.
+<inserted text> 
+                }
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+
+Package natbib Warning: Citation `katayama2025notetwopointmeansquare' on page 3
+ undefined on input line 36.
+
+[3]
+
+Package natbib Warning: Citation `bhatia2021numericalstudytrailingleading' on p
+age 4 undefined on input line 36.
+
+
+Package natbib Warning: Citation `kapoor2024trappingextremeclusteringfinitelyde
+nse' on page 4 undefined on input line 36.
+
+
+LaTeX Warning: Reference `fig:image6' on page 4 undefined on input line 40.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:image1' on page 4 undefined on input line 51.
+
+[4]
+
+LaTeX Warning: Reference `fig:image1' on page 5 undefined on input line 55.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:image3' on page 5 undefined on input line 66.
+
+
+Overfull \hbox (0.5198pt too wide) in paragraph at lines 66--67
+\TU/lmr/m/n/10 stantaneous local large-scale velocity field. The resulting anis
+otropy ratio, $\OML/cmm/m/it/10 ^^U\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/
+m/n/10 ) =
+[5]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:image2' on page 6 undefined on input line 79.
+
+[6]
+
+LaTeX Warning: Reference `fig:image4' on page 7 undefined on input line 92.
+
+[7]
+
+LaTeX Warning: Reference `fig:image0' on page 8 undefined on input line 105.
+
+[8]
+
+LaTeX Warning: Reference `fig:image5' on page 9 undefined on input line 107.
+
+
+LaTeX Warning: Reference `fig:image5' on page 9 undefined on input line 107.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9]
+No file paper_v3_citations.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+[10] (./paper_v3_citations.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information)
+Output written on paper_v3_citations.pdf (10 pages).
+Transcript written on paper_v3_citations.log.
+---- STDERR ----
+
+==== ERROR on iteration Final Pass 1 ====
+---- STDOUT ----
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper_v3_citations.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+(./paper_v3_citations.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+
+Package natbib Warning: Citation `freitas2026intermittencysuppressionturbulence
+forced' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `mizerski2022anisotropicturbulentviscositylarg
+escale' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `komorowski2005stationaritylagrangianobservati
+onspassive' on page 1 undefined on input line 32.
+
+
+Package natbib Warning: Citation `küchler2024lagrangianparticletrackinglarge' o
+n page 1 undefined on input line 32.
+
+[1] [2]
+
+./paper_v3_citations.tex:36: LaTeX Error: \mathbf allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing } inserted.
+<inserted text> 
+                }
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+
+Package natbib Warning: Citation `katayama2025notetwopointmeansquare' on page 3
+ undefined on input line 36.
+
+[3]
+
+Package natbib Warning: Citation `bhatia2021numericalstudytrailingleading' on p
+age 4 undefined on input line 36.
+
+
+Package natbib Warning: Citation `kapoor2024trappingextremeclusteringfinitelyde
+nse' on page 4 undefined on input line 36.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (0.5198pt too wide) in paragraph at lines 66--67
+\TU/lmr/m/n/10 stantaneous local large-scale velocity field. The resulting anis
+otropy ratio, $\OML/cmm/m/it/10 ^^U\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/
+m/n/10 ) =
+[5]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6] [7] [8]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9] (./paper_v3_citations.bbl [10])
+
+Package natbib Warning: There were undefined citations.
+
+[11] (./paper_v3_citations.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+) )
+(see the transcript file for additional information)
+Output written on paper_v3_citations.pdf (11 pages).
+Transcript written on paper_v3_citations.log.
+---- STDERR ----
+
+==== ERROR on iteration Final Pass 2 ====
+---- STDOUT ----
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper_v3_citations.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+(./paper_v3_citations.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd) [1] [2]
+
+./paper_v3_citations.tex:36: LaTeX Error: \mathbf allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.36 ...on\begin{equation}$$\frac{d\mathbf{x}}{dt}
+                                                   = \mathbf{v}(\mathbf{x}(t...
+
+./paper_v3_citations.tex:36: You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing $ inserted.
+<inserted text> 
+                $
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+./paper_v3_citations.tex:36: Missing } inserted.
+<inserted text> 
+                }
+l.36 ...athbf{v}(\mathbf{x}(t), t)$$\end{equation}
+                                                  using a fourth-order Runge...
+
+[3]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (0.5198pt too wide) in paragraph at lines 66--67
+\TU/lmr/m/n/10 stantaneous local large-scale velocity field. The resulting anis
+otropy ratio, $\OML/cmm/m/it/10 ^^U\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/
+m/n/10 ) =
+[5]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6] [7] [8]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9] (./paper_v3_citations.bbl [10]) [11] (./paper_v3_citations.aux) )
+(see the transcript file for additional information)
+Output written on paper_v3_citations.pdf (11 pages).
+Transcript written on paper_v3_citations.log.
+---- STDERR ----

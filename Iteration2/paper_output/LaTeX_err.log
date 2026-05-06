@@ -1,0 +1,19 @@
+LaTeX Compilation Errors Found:
+
+! Undefined control sequence.
+l.22 ...\log t)$. At very early times ($t \lesssim
+0.3$), transport is balli...
+
+? ! Undefined control sequence.
+l.22 ...rdiffusive crossover regime ($0.3 \lesssim
+t \lesssim 1.5$) where $\...
+
+?
+
+! Emergency stop.
+l.22
+
+No pages of output.
+Transcript written on Results.log.
+---- STDERR ----
+
