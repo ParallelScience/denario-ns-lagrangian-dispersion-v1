@@ -1,0 +1,7 @@
+The failure to observe Lévy flights in this 3D dataset is likely due to the "averaging out" of transport mechanisms when using global displacement statistics. I hypothesize that the transport regime is not globally anomalous, but rather **spatially heterogeneous**, where the flow field is partitioned into "straining-dominated" regions (hyperbolic points) and "vortex-dominated" regions (elliptic points). 
+
+Instead of global MSD, I propose a **Lagrangian Strain-Vorticity Correlation Analysis**:
+1. Calculate the local **Okubo-Weiss parameter** ($Q_w = S^2 - \Omega^2$) for every tracer position at every time step to classify the local flow topology (straining vs. rotation).
+2. Compute the **conditional Lagrangian velocity autocorrelation function (VACF)** separately for tracers residing in straining-dominated regions ($Q_w < 0$) versus vortex-dominated regions ($Q_w > 0$).
+3. Test the hypothesis that tracers in straining regions exhibit **ballistic-like persistent motion** (due to high strain rates), while tracers in vortex regions exhibit **sub-diffusive trapping**. 
+4. By calculating the **relative dispersion** of tracer pairs initially placed within the same vortex core versus pairs placed in straining zones, we can determine if the "anomalous" transport is masked by the ensemble average. This will reveal if the 3D turbulence acts as a multi-modal transport system where the global Gaussianity is an emergent property of two competing, non-Gaussian sub-processes, rather than a lack of anomalous dynamics.

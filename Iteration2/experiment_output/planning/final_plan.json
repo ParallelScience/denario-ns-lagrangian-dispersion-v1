@@ -1,0 +1,122 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Download 200 evenly spaced VTK snapshots (every 5th snapshot: 18903, 18908, ..., 19898) from the HuggingFace dataset.",
+                "Use the URL template: `https://huggingface.co/datasets/pedrota2000/NS_simulation/resolve/main/Turb.hydro_w.NNNNN.vtk`",
+                "Save the files to `{database_path}`.",
+                "Skip downloading if the file already exists and has a size > 0.",
+                "Print the number of successfully downloaded files."
+            ],
+            "sub_task": "Data Acquisition",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement a streaming loader that reads the 200 downloaded VTK snapshots sequentially.",
+                "For each snapshot, compute the Q-criterion field using central finite differences with periodic boundary wrapping.",
+                "Perform a 3D FFT on the velocity grid to extract the large-scale solenoidal driving component (wavenumbers 1 <= n <= 3) and inverse FFT to get `V_LS`.",
+                "Compute and cache the Q-criterion and `V_LS` fields to disk (or memory if manageable) before starting the tracer integration to ensure modularity and recoverability.",
+                "Initialize 5,000 standard tracers at random positions in the domain [-0.5, 0.5]^3.",
+                "Select the first 1,000 of these as base tracers for FTLE. For each, initialize 3 perturbed neighbors offset by `delta = 0.01 * dx` in the x, y, and z directions. Total tracers = 8,000.",
+                "Integrate all 8,000 tracers using an RK4 scheme with 10 sub-steps per snapshot interval (dt = 0.01 / 10).",
+                "Use `scipy.interpolate.RegularGridInterpolator` for spatial interpolation of the full velocity and `V_LS`. You must use vectorized batch interpolation (passing all tracer positions at once) with the `method='linear'` for speed. Construct the interpolators once per snapshot and reuse them across all sub-steps within that interval.",
+                "Enforce periodic boundary conditions via modulo arithmetic at each sub-step.",
+                "Interpolate and store the full velocity `V`, large-scale velocity `V_LS`, and Q-criterion at the positions of the 5,000 standard tracers at each snapshot.",
+                "Save a 2D slice (e.g., z=0) of the Q-criterion and velocity field from the final snapshot for visualization.",
+                "Save the wrapped trajectories of all 8,000 tracers, and the interpolated `V`, `V_LS`, and Q-criterion data to `.npy` or `.npz` files in `{database_path}`."
+            ],
+            "sub_task": "Pre-processing and Tracer Integration",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 7200
+        },
+        {
+            "bullet_points": [
+                "Load the wrapped trajectories of the 8,000 tracers from `{database_path}`.",
+                "The first 1,000 are the base tracers, and the remaining 3,000 are their perturbed neighbors (1,000 for x-offset, 1,000 for y-offset, 1,000 for z-offset).",
+                "For each of the 1,000 base tracers, compute the flow map gradient (Jacobian matrix F) at each time step using the finite differences between the base tracer and its 3 perturbed neighbors. Note that this one-sided finite difference approximation is acceptable.",
+                "Print the mean initial separation magnitude to verify the numerical appropriateness of the perturbation size.",
+                "Crucial: Use the minimum image convention to compute the separation vectors to correctly handle periodic boundary crossings.",
+                "Compute the Cauchy-Green deformation tensor `C = F^T F` and extract the maximum eigenvalue `lambda_max`.",
+                "Calculate the FTLE over time: `FTLE(t) = (1 / (2 * t)) * ln(lambda_max)`. (Handle t=0 appropriately to avoid division by zero).",
+                "Save the computed FTLE values for the 1,000 tracers to a `.npy` file in `{database_path}`."
+            ],
+            "sub_task": "FTLE Computation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the wrapped trajectories and full velocity `V` of the 5,000 standard tracers.",
+                "Compute the ensemble-averaged Mean-Square Displacement MSD(t) and component-wise MSD_x, MSD_y, MSD_z using the minimum image convention for displacements.",
+                "Calculate the Velocity Autocorrelation Function (VACF) using the stored full velocities `V` and integrate it to find the Lagrangian Integral Time Scale (tau_L).",
+                "Print the final VACF value and note whether the integral has converged. Use only the positive lobe of the VACF for the tau_L estimation if the function fails to decay to zero.",
+                "Compute the time-dependent power-law exponent alpha(t) = d(log MSD) / d(log t) using numerical differentiation.",
+                "Save MSD(t), component MSDs, VACF, tau_L, and alpha(t) to a `.npz` file in `{database_path}`."
+            ],
+            "sub_task": "Refined Scaling and Saturation Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the wrapped trajectories and the interpolated large-scale velocity vectors (`V_LS`) for the 5,000 standard tracers.",
+                "At each time step, compute the displacement vector `d(t) = x(t) - x(0)` using the minimum image convention.",
+                "Project `d(t)` onto the instantaneous local large-scale velocity vector `V_LS(x(t), t)` to get the parallel displacement component. Note that this Lagrangian frame decomposition is intentional.",
+                "Print the mean magnitude of `V_LS` to confirm it is non-negligible.",
+                "Compute the perpendicular displacement squared: `d_perp^2 = ||d||^2 - d_parallel^2`.",
+                "Calculate the ensemble-averaged MSD_parallel(t) and MSD_perp(t).",
+                "Compute the dynamic anisotropy ratio lambda(t) = MSD_parallel(t) / MSD_perp(t).",
+                "Save MSD_parallel, MSD_perp, and lambda(t) to a `.npz` file in `{database_path}`."
+            ],
+            "sub_task": "Dynamic Anisotropy Assessment",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the Q-criterion values along the trajectories of the 5,000 standard tracers, and the FTLE data for the first 1,000 tracers.",
+                "Define a threshold `Q_threshold = mean(Q) + std(Q)` computed from the full 3D Q-criterion field at the initial snapshot.",
+                "Print the threshold value and the fraction of tracer-time samples exceeding it.",
+                "Identify \"Trapped\" cohorts as tracers residing in regions with `Q > Q_threshold`.",
+                "Track entry and exit times to identify full trapping events and compute the residence time for each event.",
+                "For the 1,000 tracers with FTLE data, correlate their residence time in vortices with the local FTLE values at the exact point of exit.",
+                "Save the trapping events, residence times, and the correlation data (residence time vs exit FTLE) to a `.npz` file in `{database_path}`."
+            ],
+            "sub_task": "Vortex Trapping and Ejection Dynamics",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the wrapped trajectories of the 5,000 standard tracers and the computed `tau_L`.",
+                "Compute the probability density functions (PDFs) of 1D tracer displacements (e.g., x-component, using minimum image convention) at multiple time intervals (e.g., t = 0.5 tau_L, 1.0 tau_L, 2.0 tau_L).",
+                "Use Maximum Likelihood Estimation (MLE) or a robust curve fitting method to fit power-law tails to the displacement distributions and estimate the Levy stability index alpha_L.",
+                "Perform a Kolmogorov-Smirnov (KS) test against a Gaussian distribution for these time intervals to quantify non-Gaussianity.",
+                "Compute and save the kurtosis excess of displacement distributions to complement the KS test for tail analysis.",
+                "Save the PDFs, fitted alpha_L values, KS test statistics, and kurtosis excess to a `.npz` file in `{database_path}`."
+            ],
+            "sub_task": "Statistical Rigor and Distribution Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all the computed metrics from previous steps.",
+                "Group all plots into a maximum of three multi-panel figures to improve readability and reduce output file count.",
+                "Figure 1 (Scaling and Anisotropy): MSD(t) and component-wise MSDs with theoretical geometric saturation limit (L^2/6); Time-dependent power-law exponent alpha(t) vs time; Dynamic anisotropy ratio lambda(t) vs time.",
+                "Figure 2 (Distributions and Spatial): Displacement PDFs at the selected time intervals with fitted power-law tails and Gaussian references; 2D spatial visualization of tracer density overlaid with Q-criterion contours.",
+                "Figure 3 (Trapping Dynamics): Scatter plot of residence time vs. local FTLE at exit, with a trendline.",
+                "Save all figures as high-resolution PNGs in `{database_path}`."
+            ],
+            "sub_task": "Data Aggregation and Visualization",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Review all the printed statistics, KS test results, Levy stability indices, kurtosis excess, and descriptions of the generated plots.",
+                "Write the full Results section of the paper.",
+                "Discuss the ballistic-to-superdiffusive crossover, the impact of solenoidal driving on anisotropy (lambda), the geometric saturation, and the evidence of Levy flights vs sweeping-induced heavy tails.",
+                "Explicitly address whether the V_LS decomposition and displacement PDFs are sufficient to distinguish between Levy flights and sweeping-induced heavy tails, noting any limitations.",
+                "Interpret the correlation between vortex residence times and FTLE at ejection."
+            ],
+            "sub_task": "Final Report",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+python3 -c "import numpy as np; data = np.load('data/tracer_data.npz'); print(list(data.keys()))"
