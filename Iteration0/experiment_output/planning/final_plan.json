@@ -1,0 +1,91 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Implement a robust download manager with error handling to fetch 200 evenly spaced VTK snapshots (indices 18903 to 19898, step 5) from the HuggingFace repository, saving them to {database_path}. Crucially, check if a file already exists locally at the expected path before attempting to download it to avoid redundant network requests.",
+                "Implement a streaming data loader that keeps only two consecutive snapshots ($t_n$ and $t_{n+1}$) in memory at any time to prevent memory overflow.",
+                "Initialize 10,000 passive tracers with uniform random coordinates (x, y, z) within the domain [-0.5, 0.5]^3.",
+                "Implement an RK4 integration scheme to evolve tracer positions with 5 sub-steps per snapshot interval.",
+                "Use linear interpolation in time and scipy.interpolate.RegularGridInterpolator for trilinear spatial interpolation. Apply periodic boundary conditions when querying the velocity field.",
+                "Vectorize the integration across all 10,000 tracers for computational efficiency.",
+                "Accumulate the true unwrapped trajectories by applying the minimum image convention to the step-by-step displacements (e.g., unwrapped_pos += minimum_image(pos_new - pos_old)), ensuring macroscopic diffusion can be measured beyond the box size.",
+                "Save the unwrapped trajectories (shape (N_tracers, N_snapshots, 3), where N_snapshots is exactly the number of loaded snapshots, i.e., 200) and the time array (same length) to disk as .npy files in {database_path}.",
+                "Explicitly print key diagnostic statistics after the advection loop completes: the rms velocity used, the fraction of tracers that crossed periodic boundaries, the min/max unwrapped displacement at the final time, and the wall-clock time taken."
+            ],
+            "sub_task": "Data Acquisition, Tracer Initialization, and Advection",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 7200
+        },
+        {
+            "bullet_points": [
+                "Load the unwrapped trajectories and time array from Step 1.",
+                "Compute the ensemble-averaged Mean-Square Displacement MSD(t) = <|r(t) - r(0)|^2> and RMSD(t) = sqrt(MSD(t)) as a function of lag time.",
+                "Compute the directional components: MSD_x, MSD_y, MSD_z.",
+                "Quantify anisotropy by computing the ratio lambda = max(MSD_x, MSD_y, MSD_z) / min(MSD_x, MSD_y, MSD_z) at each time step. Print the time-averaged value of lambda to the console.",
+                "Perform log-log linear regression on MSD(t) vs t to estimate the global power-law exponent alpha. Print the numerical values of the global power-law exponent alpha with its uncertainty.",
+                "Calculate the time-dependent exponent alpha(t) by applying a Savitzky-Golay filter to the derivative of log(MSD) with respect to log(t) to identify transitions between ballistic and diffusive regimes. Print the time ranges over which each regime (ballistic, superdiffusive, diffusive) is identified.",
+                "Save the computed MSDs, RMSDs, anisotropy ratios, and alpha(t) arrays to disk in {database_path}."
+            ],
+            "sub_task": "Displacement, MSD Computation, and Scaling Law Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the unwrapped trajectories from Step 1.",
+                "Compute the probability density function (PDF) of tracer displacements at 4 selected lag times (e.g., early, mid-early, mid-late, late).",
+                "Compute and print the kurtosis of the displacement distributions at each of the 4 selected lag times.",
+                "Fit the heavy tails of these displacement PDFs to extract the power-law exponent (related to the Lévy stability index alpha_L) using linear regression on the log-log tail.",
+                "Estimate the tracer velocities using finite differences of the unwrapped trajectories.",
+                "Compute the Velocity Autocorrelation Function (VACF) and normalize it by its value at zero lag (i.e., VACF(0) = mean squared velocity) so it starts at 1.0.",
+                "Compute and print the time integral of the VACF (Taylor diffusion coefficient).",
+                "Save the PDFs, bin centers, tail exponents, and VACF arrays to disk in {database_path}."
+            ],
+            "sub_task": "Anomalous Diffusion and Statistical Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Initialize a subset of 500 tracers and 3 corresponding neighbors for each (displaced by a small epsilon=10^-5 in x, y, z) to compute the deformation gradient tensor.",
+                "Re-run the full advection pipeline from scratch for these 2,000 tracers. Reuse the downloaded VTK files from Step 1 (load from the same local directory, do not re-download).",
+                "At each snapshot, compute the velocity gradient tensor, vorticity omega = del x v, and Q-criterion field using central finite differences with periodic boundary wrapping.",
+                "Interpolate the Q-criterion to the positions of the 500 central tracers at each step.",
+                "Compute the Finite-Time Lyapunov Exponents (FTLE) for the 500 tracers based on the separation from their neighbors.",
+                "Compute the correlation between the tracers' residence time in vortex cores (Q > 0) and their total anomalous displacement.",
+                "Print the mean, median, and standard deviation of the FTLE distribution, the Pearson correlation coefficient between FTLE and Q-criterion residence time, and the fraction of tracers classified as anomalous (e.g., displacement exceeding 2 standard deviations from the mean).",
+                "Save the FTLE values, Q-criterion along trajectories, correlation statistics, and a 2D slice (e.g., z=0) of the final snapshot's Q-criterion field + wrapped tracer positions to disk in {database_path}."
+            ],
+            "sub_task": "Coherent Structure and Chaos Analysis (FTLE & Q-criterion)",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 7200
+        },
+        {
+            "bullet_points": [
+                "Load all results saved in Steps 2, 3, and 4 from {database_path}.",
+                "Plot 1: Log-log plot of MSD(t), MSD_x, MSD_y, MSD_z with reference lines for alpha=1 (Brownian) and alpha=2 (ballistic).",
+                "Plot 2: Time-dependent exponent alpha(t) vs time.",
+                "Plot 3: Displacement PDFs at the 4 lag times (log-log scale) with the fitted power-law tails overlaid.",
+                "Plot 4: Normalized VACF vs time.",
+                "Plot 5: Scatter plot of FTLE vs. residence time in Q>0 regions, and a histogram of FTLE.",
+                "Plot 6: Spatial map (2D slice) of the final snapshot's Q-criterion field overlaid with a scatter plot of the tracers near that slice to visualize interactions with turbulent structures.",
+                "Ensure all plots have descriptive titles, axis labels with units, and legends. Save them as high-resolution PNGs in {database_path}."
+            ],
+            "sub_task": "Data Aggregation and Visualization",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Write the comprehensive Results section of the research paper.",
+                "Interpret the MSD and its directional components to discuss the anisotropy of Lagrangian dispersion under solenoidal driving.",
+                "Discuss the scaling regimes identified by alpha(t), specifically the transition from ballistic to superdiffusive or normal diffusion.",
+                "Explicitly discuss the physical interpretation of the time span limitation (approximately 2 eddy turnover times covered by the 10-unit simulation window) and how this constrains the ability to observe the full diffusive limit.",
+                "Comment on whether the observed alpha(t) trajectory is consistent with the expected ballistic-to-diffusive crossover predicted by Taylor's theory for finite-time turbulent dispersion.",
+                "Analyze the displacement PDFs and the extracted tail exponents to confirm or reject the presence of anomalous diffusion (Lévy flights).",
+                "Interpret the VACF results in the context of Taylor's diffusion formula.",
+                "Discuss the physical mechanism of chaotic vortex interactions using the FTLE and Q-criterion correlation results, evaluating the \"sticky vortex\" hypothesis.",
+                "Reference all generated plots and key statistics to support the conclusions."
+            ],
+            "sub_task": "Final Report Writing",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
