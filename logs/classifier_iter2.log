@@ -1,0 +1,7 @@
+Classifier: Step 1 — Determining archive...
+  Archive: physics — The paper focuses on fluid dynamics, specifically turbulence and Lagrangian particle transport, which falls under the scope of the physics archive.
+Classifier: Step 2 — Determining subcategory within 'physics'...
+  Primary: physics.flu-dyn
+  Secondary: physics.comp-ph
+  Justification: The paper focuses on the dynamics of 3D solenoidal turbulence, particle transport, and Lagrangian tracer analysis, which are core topics in fluid dynamics. The use of direct numerical simulations (DNS) and computational analysis of velocity fields justifies the inclusion of computational physics as a secondary category.
+Classification completed in 0 min 1 sec. Cost: $0.0000
