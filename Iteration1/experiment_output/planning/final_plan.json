@@ -1,0 +1,80 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Download 200 evenly spaced VTK snapshots (indices 18903 to 19898, step 5) from the HuggingFace dataset to the user-provided data directory `/home/node/work/projects/ns_lagrangian_v1/data/`. Skip downloading if the file already exists.",
+                "Implement a robust download mechanism (e.g., using `urllib` or `requests` with retries) to handle the ~8GB total download.",
+                "Implement utility functions to read a VTK file, compute the velocity gradient, vorticity, Q-criterion, and large-scale velocity field (using FFT to filter out wavenumbers $n > 3$).",
+                "Test these functions on the first snapshot. Print key statistics from the first snapshot (e.g., velocity rms, Q-criterion min/max/mean, vorticity magnitude statistics) to the console.",
+                "Save a single multi-panel figure containing a 2D slice plot of the Q-criterion and a 2D slice plot of the vorticity magnitude side-by-side to `{database_path}` to verify correctness."
+            ],
+            "sub_task": "Data Acquisition and Pre-processing",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 7200
+        },
+        {
+            "bullet_points": [
+                "Implement a streaming loader that reads snapshots from `/home/node/work/projects/ns_lagrangian_v1/data/`, keeping only two consecutive snapshots in memory to facilitate linear time-interpolation.",
+                "Initialize 5,000 random primary tracers in the domain [-0.5, 0.5]^3. For the first 1,000 of these, initialize 3 auxiliary neighbors displaced by $\\epsilon = 10^{-5}$ in the x, y, and z directions (total 8,000 tracers).",
+                "Perform RK4 integration with 10 sub-steps per snapshot interval. Use `scipy.ndimage.map_coordinates` for fast trilinear interpolation of the velocity field, with linear time-interpolation between the two loaded snapshots.",
+                "Enforce periodic boundary conditions via modulo arithmetic at each sub-step for the 'wrapped' trajectory (used for interpolation). Compute the 'unwrapped' trajectory by accumulating displacements without applying the modulo wrap (tracking true Euclidean displacement from the origin).",
+                "At each snapshot time, interpolate the Q-criterion and large-scale velocity (FFT-filtered field, wavenumbers n=1-3 only) at the primary tracer positions.",
+                "Save the initial large-scale velocity vector at each tracer's starting position separately (to be used as a fixed reference direction).",
+                "Save the unwrapped trajectories (for all 8,000 tracers), wrapped trajectories, and the sampled Q-criterion and large-scale velocity (for the 5,000 primary tracers) as NumPy arrays in `{database_path}`."
+            ],
+            "sub_task": "Lagrangian Tracer Integration & FTLE Advection",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 7200
+        },
+        {
+            "bullet_points": [
+                "Load the primary tracer trajectories, sampled fields, and initial large-scale velocity vectors from `{database_path}`.",
+                "Compute the ensemble Mean-Square Displacement (MSD) and the time-dependent power-law exponent $\\alpha(t)$ (logarithmic derivative).",
+                "Define 'Trapped' (top 20% Q-criterion residence time) and 'Free' (bottom 20%) cohorts, and compute their MSD(t).",
+                "Partition tracers into 'Boundary-Crossers' and 'Non-Crossers' based on whether their unwrapped trajectories exceed the domain bounds [-0.5, 0.5], and compute their MSD(t).",
+                "Compute $MSD_{\\parallel}$ and $MSD_{\\perp}$ by projecting tracer displacements onto their initial large-scale velocity vector, and calculate the anisotropy ratio $\\lambda(t) = MSD_{\\parallel} / MSD_{\\perp}$.",
+                "Compute the velocity autocorrelation function (VACF) from the tracer velocity time series (obtained by finite-differencing the unwrapped trajectories), and compute the Taylor diffusion coefficient as the time integral of the VACF.",
+                "Print all key scalar results to the console: fitted global power-law exponent alpha over the full time range, alpha values for early-time (ballistic) and late-time (diffusive/superdiffusive) regimes separately, mean anisotropy ratio lambda and its standard deviation, and the fraction of tracers classified as Boundary-Crossers.",
+                "Save all computed MSDs, $\\alpha(t)$, $\\lambda(t)$, VACF, and Taylor diffusion arrays to `{database_path}`."
+            ],
+            "sub_task": "Conditional MSD, Finite-Size Saturation, and Anisotropy Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the sampled Q-criterion and the trajectories of the 1,000 tracers and their neighbors from `{database_path}`.",
+                "Calculate the autocorrelation function of the Q-criterion along the primary tracer trajectories to determine the decorrelation time of trapping events. Compute and print the Q-criterion decorrelation time (lag at which autocorrelation first crosses zero or drops to 1/e), and compare this value explicitly to the eddy turnover time estimate of ~2.6 time units.",
+                "Compute the deformation gradient tensor $F$ for the 1,000 tracers using their neighbors' trajectories, and calculate the Finite-Time Lyapunov Exponent (FTLE) for each tracer over time.",
+                "Compute the average FTLE for the 'Trapped' vs 'Free' subsets (among the 1,000 tracers). Print the mean and standard deviation of the FTLE for the Trapped and Free cohorts separately.",
+                "Perform and print the result of a simple statistical test (e.g., t-test or Mann-Whitney U test) comparing the two FTLE distributions.",
+                "Save the Q-criterion autocorrelation and FTLE results to `{database_path}`."
+            ],
+            "sub_task": "Vortex Trapping Dynamics & FTLE Computation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all analysis results from `{database_path}`.",
+                "Generate exactly three multi-panel figures to consolidate results.",
+                "Figure 1 (MSD-related results): ensemble MSD, conditional MSD (Trapped/Free), $\\alpha(t)$, and boundary-crosser MSD.",
+                "Figure 2 (Anisotropy and VACF): anisotropy ratio $\\lambda(t)$, VACF, and Taylor diffusion coefficient over time.",
+                "Figure 3 (Vortex/FTLE diagnostics): Q-criterion autocorrelation, FTLE distribution, Trapped vs Free FTLE comparison (bar chart or time-series), and a 3D spatial visualization of a subset of tracer trajectories overlaid with high Q-criterion regions for the final snapshot.",
+                "Save all plots at high resolution (dpi>=300) in `{database_path}`."
+            ],
+            "sub_task": "Data Aggregation and Visualization",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Write the full Results section of the paper based on the generated plots and statistics.",
+                "Interpret the ballistic-to-superdiffusive crossover, the impact of solenoidal driving on anisotropy ($\\lambda$), and the role of coherent structures (Q-criterion) in trapping tracers.",
+                "Explicitly address the physical interpretation of the anisotropy ratio lambda in the context of purely solenoidal driving at wavenumbers n=1-3, discussing whether the observed lambda deviates significantly from unity and what this implies about the isotropy assumption commonly made in turbulence models.",
+                "Discuss the FTLE results in the context of chaotic vortex interactions and the finite-size effects observed in the boundary-crosser analysis.",
+                "Comment on the limitations imposed by the ~4 eddy turnover time window and whether the diffusive limit has been reached.",
+                "Ensure all quantitative results and plot references are seamlessly integrated into the academic narrative."
+            ],
+            "sub_task": "Results Report",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
