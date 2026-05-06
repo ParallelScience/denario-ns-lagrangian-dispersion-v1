@@ -1,0 +1,7 @@
+The dataset description directly explains the observed failures and ambiguities in the analysis:
+
+1. **Finite-Size Saturation and Subdiffusive Scaling**: The analysis reports a late-time decline in the scaling exponent ($\alpha \approx 0.89$) and attributes this to finite-size effects. This is directly attributable to the **domain size constraint** (unit box [-0.5, 0.5]³) and the **periodic boundary conditions** described in the dataset. Because the tracers are confined to a unit box, the maximum possible displacement is limited, forcing the MSD to saturate and causing the observed subdiffusive artifact.
+
+2. **Incomplete Asymptotic Diffusion**: The researchers note that the 10-unit time span is insufficient to observe the true diffusive limit. This is directly attributable to the **limited temporal span** of the dataset (total span ≈ 10 time units) relative to the **eddy turnover time** (estimated at ~2.6 time units). The dataset's temporal coverage is too short to allow for the full decorrelation of tracer velocities required to reach the asymptotic Brownian regime.
+
+3. **Boundary-Crossing Artifacts**: The high percentage of tracers (93.48%) crossing domain boundaries is a direct consequence of the **domain size** and the **periodic boundary conditions** relative to the tracer integration duration. This constraint limits the validity of the late-time MSD calculations, as the "minimum image convention" used to compute displacements in periodic boxes becomes physically ambiguous when displacements exceed the box size.
